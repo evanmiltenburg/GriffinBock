@@ -1,7 +1,7 @@
 import json
 import csv
 import spacy
-
+from operator import itemgetter
             
 def load_data(filename):
     "Load the annotation data."
@@ -45,6 +45,7 @@ def write_data(data, filename, fieldnames):
 
 data = load_data('Resources/annotations_final.json')
 enrich(data)
+data = sorted(data, key=itemgetter('num_nouns'))
 write_data(data, 
            filename='annotated_data.csv', 
            fieldnames=['image', 'participant', 'normalized_description', 
